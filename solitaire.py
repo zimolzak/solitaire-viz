@@ -3,6 +3,10 @@ deck = (list(range(1,14)) + ['j1'] +
         list(range(14,40)) + ['j2'] +
         list(range(40,53)))
 
+#deck = (list(range(1,14)) + ['j1'] + 
+#        list(range(14,40)) + ['j2'] +
+#        list(range(40,43)))
+
 def move_card(d, card, how_far):
     top_half = d[ : d.index(card)]
     bottom_half = d[d.index(card) + 1 : ]
@@ -37,11 +41,19 @@ def count_cut(d):
     middle = d[end_val : len(d)-1]
     return middle + top + [end_val]
 
-mj = move_jokers(deck)
-tc = triple_cut(mj)
-cc = count_cut(tc)
+def one_cycle(d0, print_what = False):
+    mj = move_jokers(d0)
+    tc = triple_cut(mj)
+    cc = count_cut(tc)
+    if print_what == 'all':
+        print(mj, '\n')
+        print(tc, '\n')
+    if print_what == 'all':
+        print(cc, '\n')
+    if print_what == 'final':
+        print(cc)
+    return cc
 
-print(deck, '\n')
-print(mj, '\n')
-print(tc, '\n')
-print(cc, '\n')
+print(deck)
+for i in range(40):
+    deck = one_cycle(deck, print_what = 'final')
