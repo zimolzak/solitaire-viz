@@ -20,4 +20,17 @@ def move_jokers(d0):
     d2 = move_card(d1, 'j2', 2)
     return d2
 
-print(move_jokers(deck))
+def triple_cut(d):
+    x = d.index('j1')
+    y = d.index('j2')
+    ja = min(x,y)
+    jb = max(x,y)
+    top = d[:ja]
+    middle = d[ja : jb+1]
+    bottom = d[jb+1 : ]
+    return bottom + middle + top
+
+mj = move_jokers(deck)
+print(mj)
+tc = triple_cut(mj)
+print(tc)
