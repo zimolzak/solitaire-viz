@@ -2,7 +2,6 @@
 deck = (list(range(1,14)) + ['j1'] + 
         list(range(14,40)) + ['j2'] +
         list(range(40,53)))
-print(deck)
 
 def move_card(d, card, how_far):
     top_half = d[ : d.index(card)]
@@ -30,7 +29,19 @@ def triple_cut(d):
     bottom = d[jb+1 : ]
     return bottom + middle + top
 
+def count_cut(d):
+    end_val = d[len(d) - 1]
+    if end_val == 'j1' or end_val == 'j2':
+        end_val = 53
+    top = d[ : end_val]
+    middle = d[end_val : len(d)-1]
+    return middle + top + [end_val]
+
 mj = move_jokers(deck)
-print(mj)
 tc = triple_cut(mj)
-print(tc)
+cc = count_cut(tc)
+
+print(deck, '\n')
+print(mj, '\n')
+print(tc, '\n')
+print(cc, '\n')
