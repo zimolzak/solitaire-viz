@@ -67,24 +67,25 @@ def one_cycle(d0, print_what = False):
     return cc
 
 def longest_run(L):
-    record_len = 0
-    current_len = 0
+    record_len = 1
+    current_len = 1
     for (i, e) in enumerate(L):
         if i == 0 or type(L[i-1]) == str:
             continue
         elif type(e) == str and current_len > record_len:
             record_len = current_len
-            current_len = 0
+            current_len = 1
         elif e == L[i-1] + 1:
             current_len += 1
         elif current_len > record_len:
             record_len = current_len
-            current_len = 0
+            current_len = 1
         else:
-            current_len = 0
+            current_len = 1
     return record_len
 
-print(prettier_list(deck), '\n')
+print(prettier_list(deck))
+print('    Iter 0, Longest run:', longest_run(deck), '\n')
 for i in range(40):
     deck = one_cycle(deck, print_what = 'final')
     print('    Iter ' + str(i+1) + ', Longest run:', longest_run(deck), '\n')
