@@ -84,8 +84,13 @@ def longest_run(L):
             current_len = 1
     return record_len
 
-print(prettier_list(deck))
-print('    Iter 0, Longest run:', longest_run(deck), '\n')
-for i in range(40):
-    deck = one_cycle(deck, print_what = 'final')
-    print('    Iter ' + str(i+1) + ', Longest run:', longest_run(deck), '\n')
+run_lengths = []
+for i in range(200):
+    length_i = longest_run(deck)
+    run_lengths.append(length_i)
+    print(prettier_list(deck))
+    print('    Iter ' + str(i) + ', Longest run:', length_i, '\n')
+    deck = one_cycle(deck)
+
+print('Final run length trend:')
+print(run_lengths)
