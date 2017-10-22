@@ -15,8 +15,10 @@ def move_card(d, card, how_far):
         very_bottom = bottom_half[how_far : ]
         return top_half + middle + [card] + very_bottom
     else:
-        raise Exception("Card needs to wrap, len", len(bottom_half), 
-                        'how_far', how_far)
+        how_much_further = how_far - len(bottom_half)
+        very_top = top_half[ : 1+how_much_further]
+        middle = top_half[1+how_much_further : ]
+        return very_top + [card] + middle + bottom_half
 
 def move_jokers(d0):
     d1 = move_card(d0, 'j1', 1)
@@ -41,19 +43,29 @@ def count_cut(d):
     middle = d[end_val : len(d)-1]
     return middle + top + [end_val]
 
+def prettier_list(L):
+    SL = [str(e) for e in L]
+    S = ''
+    for f in SL:
+        if len(f) == 1:
+            S = S + ' ' + f + ' '
+        else:
+            S = S + f + ' '
+    return S
+
 def one_cycle(d0, print_what = False):
     mj = move_jokers(d0)
     tc = triple_cut(mj)
     cc = count_cut(tc)
     if print_what == 'all':
-        print(mj, '\n')
-        print(tc, '\n')
+        print(prettier_list(mj))
+        print(prettier_list(tc))
     if print_what == 'all':
-        print(cc, '\n')
+        print(prettier_list(cc), '\n')
     if print_what == 'final':
-        print(cc)
+        print(prettier_list(cc))
     return cc
 
-print(deck)
+print(prettier_list(deck), '\n')
 for i in range(40):
     deck = one_cycle(deck, print_what = 'final')
