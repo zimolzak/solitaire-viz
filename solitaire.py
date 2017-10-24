@@ -3,10 +3,6 @@ deck = (list(range(1,14)) + ['j1'] +
         list(range(14,40)) + ['j2'] +
         list(range(40,53)))
 
-#deck = (list(range(1,14)) + ['j1'] + 
-#        list(range(14,40)) + ['j2'] +
-#        list(range(40,43)))
-
 def move_card(d, card, how_far):
     top_half = d[ : d.index(card)]
     bottom_half = d[d.index(card) + 1 : ]
@@ -88,9 +84,5 @@ run_lengths = []
 for i in range(200):
     length_i = longest_run(deck)
     run_lengths.append(length_i)
-    print(prettier_list(deck))
-    print('    Iter ' + str(i) + ', Longest run:', length_i, '\n')
+    print(str(deck).replace('[', '').replace(']', ''))
     deck = one_cycle(deck)
-
-print('Final run length trend:')
-print(run_lengths)
